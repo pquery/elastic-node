@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//var routes = require('./routes'),
+//var  user = require('./routes/user'),
+
 var app = express();
 
 // view engine setup
@@ -23,8 +26,26 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+//app.use('/', routes);
+//app.use('/users', users);
+
+app.get('/', function(req, res){
+  res.render('index', {
+    title: 'Home'
+  });
+});
+
+app.get('/about', function(req, res){
+  res.render('about', {
+    title: 'About'
+  });
+});
+
+app.get('/contact', function(req, res){
+  res.render('contact', {
+    title: 'Contact'
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,6 +77,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;
